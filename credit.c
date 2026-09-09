@@ -3,7 +3,7 @@ int main(void){
     long card_number;
     // here we asking the number of card
     printf("Number:");
-    scanf("%lld", &card_number);
+    scanf("%ld", &card_number);
     long temp = card_number; 
     int sum = 0;
     int position = 0; //calculating the position from the right to the left
@@ -26,6 +26,32 @@ int main(void){
         printf("Invalid\n");
         return 0; // ending the code
     }
-    printf("Valid\n");
+    //now we should find the length and first numbers
+    long temp_card = card_number;
+    int length = 0;
+    long start_digits = 0;
+    while (temp_card > 0){
+        // we 2 last number remainds we memorize them
+        if (temp_card >= 10 && temp_card <= 99){
+            start_digits = temp_card;
+        }
+        temp_card /= 10;
+        length++;
+
+    }
+    int firt_digit = start_digits / 10;
+    // now checking the type of cards
+    if (length == 15 && (start_digits == 34 || start_digits == 37)){
+        printf("AMEX\n");
+    }
+    else if (length == 16 && (start_digits >= 51 && start_digits <=55)){
+        printf("MASTERCARD\n");
+    }
+    else if (length == 13 || length == 16 && firt_digit == 4){
+        printf("VISA\n");
+    }
+    else {
+        printf("INVALID\n");
+    }
     return 0;
 }
